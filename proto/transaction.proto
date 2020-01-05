@@ -10,7 +10,7 @@ option java_outer_classname = "TransactionProto";
 option java_package = "io.xpring.proto";
 
 // A class encompassing all transactions.
-// Next field: 7.
+// Next field: 8.
 message Transaction {
     // The account originating the transaction.
     string account = 1;
@@ -31,4 +31,7 @@ message Transaction {
 
     // The highest ledger index this transaction can appear in.
     uint32 last_ledger_sequence = 6;
+
+    // The invoiceID originating the transaction.
+    string invoiceID = 7;
 }
