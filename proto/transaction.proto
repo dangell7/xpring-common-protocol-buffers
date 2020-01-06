@@ -10,28 +10,92 @@ option java_outer_classname = "TransactionProto";
 option java_package = "io.xpring.proto";
 
 // A class encompassing all transactions.
-// Next field: 8.
 message Transaction {
     // The account originating the transaction.
-    string account = 1;
+    AccountAddress account = 1;
 
     // The fee attached to the transaction.
     XRPAmount fee = 2;
 
     // The sequence number for the transaction.
-    uint64 sequence = 3;
+    uint32 sequence = 3;
 
     // Data specific to a the type of transaction being submitted.
     oneof transaction_data {
         Payment payment = 4;
     }
 
-    // The public key of the account which signed the transaction in hexadecimal.
-    string signing_public_key_hex = 5;
+    // Public key of the account which signed the transaction. Variable length
+    bytes signing_public_key = 5;
 
-    // The highest ledger index this transaction can appear in.
-    uint32 last_ledger_sequence = 6;
+    // Variable length
+    bytes signature = 6;
 
-    // The invoiceID originating the transaction.
-    string invoiceID = 7;
+    uint32 flags = 7;
+
+    uint32 last_ledger_sequence = 8;
+
+    uint32 source_tag = 9;
+
+    repeated Memo memos = 10;
+
+    repeated Signer signers = 11;
+
+    bytes account_transaction_id = 12;
+}
+
+message Memo {
+
+    // Variable length
+    bytes memo_data = 1;
+
+    // Variable length
+    bytes memo_format = 2;
+
+    // Variable length
+    bytes memo_type = 3;
+}
+
+message Signer  {
+
+    AccountAddress account = 1;
+
+    // Variable length
+    bytes transaction_signature = 2;
+
+    // Variable length
+    bytes signing_public_key = 3;
+}
+
+message Payment {
+    // The amount of currency to pay, in either issued currency or XRP.
+    CurrencyAmount amount = 1;
+
+    // The destination of the payment.
+    AccountAddress destination = 2;
+
+    uint32 destination_tag = 3;
+
+    // 32 bytes
+    bytes invoice_id = 4;
+
+    repeated Path paths = 5;
+
+    CurrencyAmount send_max = 6;
+
+    CurrencyAmount deliver_min = 7;
+}
+
+message Path {
+
+    repeated PathElement elements = 1;
+}
+
+message PathElement {
+
+    AccountAddress account = 1;
+
+    Currency currency = 2;
+
+    AccountAddress issuer = 3;
 }
