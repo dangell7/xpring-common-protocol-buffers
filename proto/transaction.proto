@@ -15,7 +15,7 @@ message Transaction {
     AccountAddress account = 1;
 
     // The fee attached to the transaction.
-    XRPAmount fee = 2;
+    XRPDropsAmount fee = 2;
 
     // The sequence number for the transaction.
     uint32 sequence = 3;
