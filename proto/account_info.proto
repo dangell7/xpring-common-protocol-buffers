@@ -12,7 +12,7 @@ option java_package = "io.xpring.proto";
 // Next field: 6
 message AccountInfo {
   // The account's current XRP balance.
-  XRPAmount balance = 1;
+  XRPDropsAmount balance = 1;
 
   // The sequence number of the next valid transaction for this account.
   uint64 sequence = 2;

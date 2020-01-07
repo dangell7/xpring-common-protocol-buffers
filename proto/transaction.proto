@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package io.xpring;
 
-import "payment.proto";
 import "xrp_amount.proto";
 
 option java_multiple_files = true;
